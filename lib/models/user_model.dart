@@ -142,11 +142,21 @@ class LoginResponse {
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
+    final accessToken = json['accessToken'] as String?;
+    final refreshToken = json['refreshToken'] as String?;
+    
+    if (accessToken == null || accessToken.isEmpty) {
+      throw Exception('Invalid response: accessToken is missing');
+    }
+    if (refreshToken == null || refreshToken.isEmpty) {
+      throw Exception('Invalid response: refreshToken is missing');
+    }
+    
     return LoginResponse(
-      accessToken: json['accessToken'] ?? '',
-      refreshToken: json['refreshToken'] ?? '',
-      message: json['message'] ?? '',
-      school: json['school'] != null ? SchoolInfo.fromJson(json['school']) : null,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      message: json['message'] as String? ?? 'Login successful',
+      school: json['school'] != null ? SchoolInfo.fromJson(json['school'] as Map<String, dynamic>) : null,
     );
   }
 }

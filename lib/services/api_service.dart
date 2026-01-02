@@ -300,9 +300,13 @@ class ApiService {
         break;
       case DioExceptionType.unknown:
         if (error.message?.contains('SocketException') ?? false) {
-          message = 'No internet connection';
+          message = 'No internet connection. Please check your network.';
+        } else if (error.message?.contains('HandshakeException') ?? false) {
+          message = 'SSL/TLS connection error. Please check your internet connection.';
+        } else if (error.message?.contains('Connection refused') ?? false) {
+          message = 'Cannot connect to server. Please try again later.';
         } else {
-          message = 'Network error. Please check your connection.';
+          message = 'Network error: ${error.message ?? "Unknown error"}';
         }
         break;
       default:

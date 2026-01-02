@@ -36,27 +36,48 @@ class AuthService {
     String? schoolCode,
   }) async {
     try {
+      print('🔐 Attempting login for: $username');
+      
       final response = await _apiService.post(
         ApiConfig.login,
         data: {
           'username': username,
           'password': password,
-          if (schoolCode != null) 'schoolCode': schoolCode,
+          if (schoolCode != null && schoolCode.isNotEmpty) 'schoolCode': schoolCode,
         },
       );
 
-      final loginResponse = LoginResponse.fromJson(response.data);
+      print('✅ Login response received: ${response.statusCode}');
+      print('📦 Response data type: ${response.data.runtimeType}');
+      
+      if (response.data == null) {
+        throw Exception('Server returned empty response');
+      }
+      
+      final loginResponse = LoginResponse.fromJson(response.data as Map<String, dynamic>);
+      
+      print('🎫 Tokens received, saving...');
       
       // Save tokens
       await _storageService.saveAccessToken(loginResponse.accessToken);
       await _storageService.saveRefreshToken(loginResponse.refreshToken);
       await _storageService.setLoggedIn(true);
       
+      print('👤 Fetching user details...');
+      
       // Fetch and save user details
       await fetchUserDetails();
       
+      print('✅ Login successful!');
+      
       return loginResponse;
     } catch (e) {
+      print('❌ Login error: $e');
+      if (e.toString().contains('SocketException')) {
+        throw Exception('No internet connection. Please check your network.');
+      } else if (e.toString().contains('TimeoutException')) {
+        throw Exception('Connection timeout. Please try again.');
+      }
       rethrow;
     }
   }
@@ -166,16 +187,27 @@ class AuthService {
   // Fetch user details
   Future<User> fetchUserDetails() async {
     try {
+      print('📡 Fetching user details from API...');
+      
       final response = await _apiService.get(
         ApiConfig.getUserDetails,
         requiresAuth: true,
       );
       
-      _currentUser = User.fromJson(response.data);
+      print('✅ User details response: ${response.statusCode}');
+      
+      if (response.data == null) {
+        throw Exception('Failed to fetch user details');
+      }
+      
+      _currentUser = User.fromJson(response.data as Map<String, dynamic>);
       await _storageService.saveUserData(_currentUser!);
+      
+      print('💾 User details saved: ${_currentUser!.name}');
       
       return _currentUser!;
     } catch (e) {
+      print('❌ Error fetching user details: $e');
       rethrow;
     }
   }
