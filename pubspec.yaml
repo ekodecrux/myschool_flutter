@@ -2,7 +2,7 @@ name: myschool_app
 description: "MySchool Mobile App - Educational Platform"
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+3
 
 environment:
   sdk: ^3.5.4
