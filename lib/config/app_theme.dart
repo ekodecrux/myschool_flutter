@@ -6,25 +6,26 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.light(
-        primary: AppConstants.primaryColor,
-        secondary: AppConstants.secondaryColor,
+        primary: AppConstants.primaryMagenta,
+        secondary: AppConstants.primaryBlue,
+        tertiary: AppConstants.accentOrange,
         error: AppConstants.errorColor,
         surface: AppConstants.surfaceColor,
         background: AppConstants.backgroundColor,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: AppConstants.textPrimaryColor,
+        onBackground: AppConstants.textPrimaryColor,
       ),
       scaffoldBackgroundColor: AppConstants.backgroundColor,
       
       // AppBar Theme
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppConstants.primaryColor,
-        foregroundColor: Colors.white,
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppConstants.backgroundColor,
+        foregroundColor: AppConstants.textPrimaryColor,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
-        ),
+        titleTextStyle: AppConstants.headingSmall,
       ),
       
       // Card Theme
@@ -32,44 +33,45 @@ class AppTheme {
         color: AppConstants.surfaceColor,
         elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
+          borderRadius: BorderRadius.circular(AppConstants.radiusLarge),
         ),
       ),
       
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppConstants.surfaceColor,
+        fillColor: Colors.grey[50],
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
-          borderSide: const BorderSide(color: AppConstants.borderColor),
+          borderSide: BorderSide(color: AppConstants.borderColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
-          borderSide: const BorderSide(color: AppConstants.borderColor),
+          borderSide: BorderSide(color: AppConstants.borderColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
-          borderSide: const BorderSide(color: AppConstants.primaryColor, width: 2),
+          borderSide: BorderSide(color: AppConstants.primaryBlue, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
-          borderSide: const BorderSide(color: AppConstants.errorColor),
+          borderSide: BorderSide(color: AppConstants.errorColor),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
-          borderSide: const BorderSide(color: AppConstants.errorColor, width: 2),
+          borderSide: BorderSide(color: AppConstants.errorColor, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppConstants.spacingMedium,
           vertical: AppConstants.spacingMedium,
         ),
+        hintStyle: TextStyle(color: AppConstants.textHintColor),
       ),
       
       // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppConstants.primaryColor,
+          backgroundColor: AppConstants.primaryMagenta,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(
             horizontal: AppConstants.spacingLarge,
@@ -82,6 +84,7 @@ class AppTheme {
           textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
+            fontFamily: 'Roboto',
           ),
         ),
       ),
@@ -89,10 +92,11 @@ class AppTheme {
       // Text Button Theme
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppConstants.primaryColor,
+          foregroundColor: AppConstants.primaryBlue,
           textStyle: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
+            fontFamily: 'Roboto',
           ),
         ),
       ),
@@ -100,8 +104,8 @@ class AppTheme {
       // Outlined Button Theme
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppConstants.primaryColor,
-          side: const BorderSide(color: AppConstants.primaryColor),
+          foregroundColor: AppConstants.primaryBlue,
+          side: BorderSide(color: AppConstants.primaryBlue, width: 2),
           padding: const EdgeInsets.symmetric(
             horizontal: AppConstants.spacingLarge,
             vertical: AppConstants.spacingMedium,
@@ -112,60 +116,32 @@ class AppTheme {
           textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
+            fontFamily: 'Roboto',
           ),
         ),
       ),
       
-      // Bottom Navigation Bar Theme
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppConstants.surfaceColor,
-        selectedItemColor: AppConstants.primaryColor,
-        unselectedItemColor: AppConstants.textSecondaryColor,
-        type: BottomNavigationBarType.fixed,
-        elevation: 8,
+      // Floating Action Button Theme
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppConstants.accentOrange,
+        foregroundColor: Colors.white,
+        elevation: 4,
       ),
       
       // Text Theme
       textTheme: const TextTheme(
-        headlineLarge: AppConstants.headingLarge,
+        displayLarge: AppConstants.headingLarge,
+        displayMedium: AppConstants.headingMedium,
+        displaySmall: AppConstants.headingSmall,
         headlineMedium: AppConstants.headingMedium,
         headlineSmall: AppConstants.headingSmall,
+        titleLarge: AppConstants.headingSmall,
         bodyLarge: AppConstants.bodyLarge,
         bodyMedium: AppConstants.bodyMedium,
         bodySmall: AppConstants.bodySmall,
       ),
       
-      // Icon Theme
-      iconTheme: const IconThemeData(
-        color: AppConstants.textPrimaryColor,
-        size: 24,
-      ),
-      
-      // Divider Theme
-      dividerTheme: const DividerThemeData(
-        color: AppConstants.borderColor,
-        thickness: 1,
-        space: 1,
-      ),
-      
-      // Chip Theme
-      chipTheme: ChipThemeData(
-        backgroundColor: AppConstants.backgroundColor,
-        selectedColor: AppConstants.primaryColor.withOpacity(0.2),
-        labelStyle: AppConstants.bodyMedium,
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppConstants.spacingMedium,
-          vertical: AppConstants.spacingSmall,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.radiusLarge),
-        ),
-      ),
-      
-      // Progress Indicator Theme
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: AppConstants.primaryColor,
-      ),
+      fontFamily: 'Roboto',
     );
   }
 }

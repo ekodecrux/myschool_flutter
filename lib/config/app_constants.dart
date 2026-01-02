@@ -3,7 +3,34 @@ import 'package:flutter/material.dart';
 class AppConstants {
   // App Info
   static const String appName = 'MySchool';
+  static const String appTagline = 'Solutions Beyond School';
   static const String appVersion = '1.0.0';
+  
+  // MySchool Brand Colors (from portal.myschoolct.com)
+  static const Color primaryMagenta = Color(0xFFE91E63);    // "my" in logo
+  static const Color primaryBlue = Color(0xFF2196F3);       // "school" in logo
+  static const Color accentOrange = Color(0xFFFF9800);      // Search/voice icons
+  static const Color backgroundColor = Color(0xFFFFFFFF);   // White background
+  static const Color surfaceColor = Color(0xFFFFFFFF);      // White surface
+  static const Color errorColor = Color(0xFFF44336);        // Error red
+  static const Color successColor = Color(0xFF4CAF50);      // Success green
+  
+  // Category Colors (from web portal)
+  static const Color academicBlue = Color(0xFF5C6BC0);
+  static const Color careerOrange = Color(0xFFFF9800);
+  static const Color edutainmentGreen = Color(0xFF66BB6A);
+  static const Color printRichPink = Color(0xFFEC407A);
+  static const Color makerGray = Color(0xFF78909C);
+  static const Color infoHubBlue = Color(0xFF42A5F5);
+  
+  // Text Colors
+  static const Color textPrimaryColor = Color(0xFF212121);  // Dark text
+  static const Color textSecondaryColor = Color(0xFF757575); // Gray text
+  static const Color textHintColor = Color(0xFFBDBDBD);     // Light gray
+  
+  // Border & Divider
+  static const Color borderColor = Color(0xFFE0E0E0);       // Light gray border
+  static const Color dividerColor = Color(0xFFEEEEEE);      // Very light gray
   
   // User Roles
   static const String roleSuperAdmin = 'SUPER_ADMIN';
@@ -12,15 +39,45 @@ class AppConstants {
   static const String roleStudent = 'STUDENT';
   static const String roleParent = 'PARENT';
   static const String roleIndividual = 'INDIVIDUAL';
-  static const String rolePublication = 'PUBLICATION';
   
-  // Image Categories
-  static const List<String> imageCategories = [
-    'ACADEMIC',
-    'CLASS',
-    'GREAT',
-    'IMAGE',
-    'MENU',
+  // Categories (matching web app)
+  static const List<Map<String, dynamic>> categories = [
+    {
+      'id': 'academic',
+      'name': 'Academic',
+      'icon': 'star',
+      'color': academicBlue,
+    },
+    {
+      'id': 'early_career',
+      'name': 'Early Career',
+      'icon': 'work',
+      'color': careerOrange,
+    },
+    {
+      'id': 'edutainment',
+      'name': 'Edutainment',
+      'icon': 'games',
+      'color': edutainmentGreen,
+    },
+    {
+      'id': 'print_rich',
+      'name': 'Print Rich',
+      'icon': 'print',
+      'color': printRichPink,
+    },
+    {
+      'id': 'maker',
+      'name': 'Maker',
+      'icon': 'build',
+      'color': makerGray,
+    },
+    {
+      'id': 'info_hub',
+      'name': 'Info Hub',
+      'icon': 'share',
+      'color': infoHubBlue,
+    },
   ];
   
   // Maker Types
@@ -33,26 +90,10 @@ class AppConstants {
     'Newsletter',
   ];
   
-  // MySchool Brand Colors (matching web app exactly)
-  static const Color primaryColor = Color(0xFF34518A);      // Main brand blue from web
-  static const Color secondaryColor = Color(0xFF7BA6FB);    // Hover/accent blue from web
-  static const Color accentColor = Color(0xFF7BA6FB);       // Same as secondary
-  static const Color errorColor = Color(0xFFD32F2F);        // Error red
-  static const Color successColor = Color(0xFF388E3C);      // Success green
-  static const Color warningColor = Color(0xFFF57C00);      // Warning orange
-  static const Color infoColor = Color(0xFF34518A);         // Same as primary
-  
-  static const Color backgroundColor = Color(0xFFF5F5F5);   // Light gray background
-  static const Color surfaceColor = Color(0xFFFFFFFF);      // White surface
-  static const Color textPrimaryColor = Color(0xFF212121);  // Dark gray text
-  static const Color textSecondaryColor = Color(0xFF757575); // Medium gray text
-  static const Color borderColor = Color(0xFFDDDDDD);       // Light gray border from web
-  static const Color linkColor = Color(0xFF34518A);         // Link blue (same as primary)
-  
-  // Text Styles (matching web app fonts: Roboto)
+  // Text Styles
   static const TextStyle headingLarge = TextStyle(
     fontSize: 32,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     color: textPrimaryColor,
     fontFamily: 'Roboto',
   );
@@ -92,21 +133,6 @@ class AppConstants {
     fontFamily: 'Roboto',
   );
   
-  static const TextStyle labelStyle = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w700,
-    color: textPrimaryColor,
-    fontFamily: 'Roboto',
-  );
-  
-  static const TextStyle linkStyle = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    color: linkColor,
-    decoration: TextDecoration.none,
-    fontFamily: 'Roboto',
-  );
-  
   // Spacing
   static const double spacingXSmall = 4.0;
   static const double spacingSmall = 8.0;
@@ -121,7 +147,7 @@ class AppConstants {
   static const double radiusXLarge = 16.0;
   
   // Validation
-  static const int minPasswordLength = 8;
+  static const int minPasswordLength = 6;
   static const int maxPasswordLength = 50;
   static const int otpLength = 6;
   
@@ -134,34 +160,12 @@ class AppConstants {
     r'^[6-9]\d{9}$',
   );
   
-  static final RegExp passwordRegex = RegExp(
-    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]',
-  );
-  
   // Error Messages
   static const String errorGeneric = 'Something went wrong. Please try again.';
   static const String errorNetwork = 'Network error. Please check your connection.';
-  static const String errorTimeout = 'Request timeout. Please try again.';
   static const String errorUnauthorized = 'Session expired. Please login again.';
-  static const String errorInvalidCredentials = 'Invalid email or password.';
-  static const String errorEmailExists = 'Email already registered.';
   
   // Success Messages
   static const String successLogin = 'Login successful';
   static const String successRegister = 'Registration successful';
-  static const String successPasswordReset = 'Password reset successful';
-  static const String successProfileUpdate = 'Profile updated successfully';
-  static const String successImageSaved = 'Image saved successfully';
-  
-  // Validation Messages
-  static const String validationEmailRequired = 'Email is required';
-  static const String validationEmailInvalid = 'Please enter a valid email';
-  static const String validationPasswordRequired = 'Password is required';
-  static const String validationPasswordLength = 'Password must be at least 8 characters';
-  static const String validationPasswordWeak = 'Password must contain uppercase, lowercase, number and special character';
-  static const String validationPhoneRequired = 'Phone number is required';
-  static const String validationPhoneInvalid = 'Please enter a valid 10-digit phone number';
-  static const String validationNameRequired = 'Name is required';
-  static const String validationOtpRequired = 'OTP is required';
-  static const String validationOtpInvalid = 'Please enter a valid 6-digit OTP';
 }
