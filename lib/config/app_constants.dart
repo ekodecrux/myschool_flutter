@@ -10,6 +10,12 @@ class AppConstants {
   static const Color primaryMagenta = Color(0xFFE91E63);    // "my" in logo
   static const Color primaryBlue = Color(0xFF2196F3);       // "school" in logo
   static const Color accentOrange = Color(0xFFFF9800);      // Search/voice icons
+  
+  // Backward compatibility aliases
+  static const Color primaryColor = primaryMagenta;         // Alias for old screens
+  static const Color secondaryColor = primaryBlue;          // Alias for old screens
+  static const Color accentColor = accentOrange;            // Alias for old screens
+  static const Color infoColor = primaryBlue;               // Alias for old screens
   static const Color backgroundColor = Color(0xFFFFFFFF);   // White background
   static const Color surfaceColor = Color(0xFFFFFFFF);      // White surface
   static const Color errorColor = Color(0xFFF44336);        // Error red
@@ -168,4 +174,16 @@ class AppConstants {
   // Success Messages
   static const String successLogin = 'Login successful';
   static const String successRegister = 'Registration successful';
+  static const String successPasswordReset = 'Password reset successful';
+  
+  // Validation Messages
+  static const String validationEmailRequired = 'Email is required';
+  static const String validationEmailInvalid = 'Please enter a valid email';
+  static const String validationPasswordRequired = 'Password is required';
+  static const String validationPasswordLength = 'Password must be at least 6 characters';
+  static const String validationPhoneRequired = 'Phone number is required';
+  static const String validationPhoneInvalid = 'Please enter a valid 10-digit phone number';
+  static const String validationOtpRequired = 'OTP is required';
+  static const String validationOtpInvalid = 'Please enter a valid 6-digit OTP';
+  static const String validationNameRequired = 'Name is required';
 }

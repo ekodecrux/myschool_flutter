@@ -6,7 +6,7 @@ class CategoryScreen extends StatefulWidget {
 
   const CategoryScreen({
     super.key,
-    required this category,
+    required this.category,
   });
 
   @override
