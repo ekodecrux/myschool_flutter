@@ -269,10 +269,51 @@ class ApiService {
         final statusCode = error.response?.statusCode;
         final data = error.response?.data;
         
-        if (data is Map && data.containsKey('message')) {
-          message = data['message'];
-        } else if (data is Map && data.containsKey('error')) {
-          message = data['error'];
+        // Try to extract error message from response
+        if (data is Map) {
+          if (data.containsKey('message')) {
+            message = data['message'];
+          } else if (data.containsKey('error')) {
+            message = data['error'];
+          } else if (data.containsKey('detail')) {
+            // Handle FastAPI/Pydantic validation errors
+            final detail = data['detail'];
+            if (detail is List && detail.isNotEmpty) {
+              final firstError = detail[0];
+              if (firstError is Map && firstError.containsKey('msg')) {
+                message = firstError['msg'];
+              } else {
+                message = detail.toString();
+              }
+            } else if (detail is String) {
+              message = detail;
+            } else {
+              message = 'Validation error';
+            }
+          } else {
+            switch (statusCode) {
+              case 400:
+                message = 'Bad request';
+                break;
+              case 401:
+                message = 'Unauthorized. Please login again.';
+                break;
+              case 403:
+                message = 'Access forbidden';
+                break;
+              case 404:
+                message = 'Resource not found';
+                break;
+              case 422:
+                message = 'Invalid input. Please check your data.';
+                break;
+              case 500:
+                message = 'Server error. Please try again later.';
+                break;
+              default:
+                message = 'An error occurred (${statusCode ?? 'unknown'})';
+            }
+          }
         } else {
           switch (statusCode) {
             case 400:
@@ -286,6 +327,9 @@ class ApiService {
               break;
             case 404:
               message = 'Resource not found';
+              break;
+            case 422:
+              message = 'Invalid input. Please check your data.';
               break;
             case 500:
               message = 'Server error. Please try again later.';
