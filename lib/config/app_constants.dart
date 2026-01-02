@@ -33,56 +33,78 @@ class AppConstants {
     'Newsletter',
   ];
   
-  // Colors (matching web app theme)
-  static const Color primaryColor = Color(0xFF2563EB); // Blue
-  static const Color secondaryColor = Color(0xFF10B981); // Green
-  static const Color accentColor = Color(0xFFF59E0B); // Amber
-  static const Color errorColor = Color(0xFFEF4444); // Red
-  static const Color successColor = Color(0xFF10B981); // Green
-  static const Color warningColor = Color(0xFFF59E0B); // Amber
-  static const Color infoColor = Color(0xFF3B82F6); // Blue
+  // MySchool Brand Colors (matching web app exactly)
+  static const Color primaryColor = Color(0xFF34518A);      // Main brand blue from web
+  static const Color secondaryColor = Color(0xFF7BA6FB);    // Hover/accent blue from web
+  static const Color accentColor = Color(0xFF7BA6FB);       // Same as secondary
+  static const Color errorColor = Color(0xFFD32F2F);        // Error red
+  static const Color successColor = Color(0xFF388E3C);      // Success green
+  static const Color warningColor = Color(0xFFF57C00);      // Warning orange
+  static const Color infoColor = Color(0xFF34518A);         // Same as primary
   
-  static const Color backgroundColor = Color(0xFFF9FAFB);
-  static const Color surfaceColor = Color(0xFFFFFFFF);
-  static const Color textPrimaryColor = Color(0xFF111827);
-  static const Color textSecondaryColor = Color(0xFF6B7280);
-  static const Color borderColor = Color(0xFFE5E7EB);
+  static const Color backgroundColor = Color(0xFFF5F5F5);   // Light gray background
+  static const Color surfaceColor = Color(0xFFFFFFFF);      // White surface
+  static const Color textPrimaryColor = Color(0xFF212121);  // Dark gray text
+  static const Color textSecondaryColor = Color(0xFF757575); // Medium gray text
+  static const Color borderColor = Color(0xFFDDDDDD);       // Light gray border from web
+  static const Color linkColor = Color(0xFF34518A);         // Link blue (same as primary)
   
-  // Text Styles
+  // Text Styles (matching web app fonts: Roboto)
   static const TextStyle headingLarge = TextStyle(
     fontSize: 32,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w700,
     color: textPrimaryColor,
+    fontFamily: 'Roboto',
   );
   
   static const TextStyle headingMedium = TextStyle(
     fontSize: 24,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
     color: textPrimaryColor,
+    fontFamily: 'Roboto',
   );
   
   static const TextStyle headingSmall = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     color: textPrimaryColor,
+    fontFamily: 'Roboto',
   );
   
   static const TextStyle bodyLarge = TextStyle(
     fontSize: 16,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
     color: textPrimaryColor,
+    fontFamily: 'Roboto',
   );
   
   static const TextStyle bodyMedium = TextStyle(
     fontSize: 14,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
     color: textPrimaryColor,
+    fontFamily: 'Roboto',
   );
   
   static const TextStyle bodySmall = TextStyle(
     fontSize: 12,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
     color: textSecondaryColor,
+    fontFamily: 'Roboto',
+  );
+  
+  static const TextStyle labelStyle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: textPrimaryColor,
+    fontFamily: 'Roboto',
+  );
+  
+  static const TextStyle linkStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: linkColor,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
   );
   
   // Spacing
