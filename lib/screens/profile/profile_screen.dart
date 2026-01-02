@@ -186,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           const Divider(height: 1),
                           ListTile(
-                            leading: const Icon(Icons.notifications_outline),
+                            leading: const Icon(Icons.notifications_none),
                             title: const Text('Notifications'),
                             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                             onTap: () {
