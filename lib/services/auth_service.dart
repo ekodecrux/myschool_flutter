@@ -63,12 +63,18 @@ class AuthService {
       await _storageService.saveRefreshToken(loginResponse.refreshToken);
       await _storageService.setLoggedIn(true);
       
-      print('👤 Fetching user details...');
+      print('✅ Login successful! Tokens saved.');
       
-      // Fetch and save user details
-      await fetchUserDetails();
-      
-      print('✅ Login successful!');
+      // Try to fetch user details, but don't fail login if it fails
+      try {
+        print('👤 Fetching user details...');
+        await fetchUserDetails();
+        print('✅ User details fetched successfully');
+      } catch (e) {
+        print('⚠️ Could not fetch user details immediately: $e');
+        print('ℹ️ User details will be fetched later');
+        // Don't throw - login is still successful
+      }
       
       return loginResponse;
     } catch (e) {

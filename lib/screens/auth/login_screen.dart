@@ -34,18 +34,26 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _handleLogin() async {
+    // Validate form first
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
+    // Hide keyboard
+    FocusScope.of(context).unfocus();
+
     setState(() => _isLoading = true);
 
     try {
+      print('🔐 Starting login process...');
+      
       await _authService.login(
         username: _emailController.text.trim(),
         password: _passwordController.text,
         schoolCode: _showSchoolCode ? _schoolCodeController.text.trim() : null,
       );
+
+      print('✅ Login successful, navigating to home...');
 
       if (mounted) {
         Navigator.of(context).pushReplacement(
@@ -53,11 +61,26 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     } catch (e) {
+      print('❌ Login failed in UI: $e');
+      
       if (mounted) {
+        // Extract clean error message
+        String errorMessage = e.toString()
+            .replaceAll('Exception: ', '')
+            .replaceAll('DioException [unknown]: ', '')
+            .replaceAll('DioException: ', '');
+        
+        // Show user-friendly error
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(e.toString().replaceAll('Exception: ', '')),
+            content: Text(errorMessage),
             backgroundColor: AppConstants.errorColor,
+            duration: const Duration(seconds: 4),
+            action: SnackBarAction(
+              label: 'Dismiss',
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
           ),
         );
       }
